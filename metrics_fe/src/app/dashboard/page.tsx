@@ -1,5 +1,9 @@
 "use client"
 
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
+
 import { useQuery } from '@apollo/client';
 import { gql } from '../../gql/';
 import Client from '../../gql/client';
@@ -20,28 +24,34 @@ const DashboardPage = () => {
 
   return (
     <div>
-      <h3>Dashboard</h3>
+      <h3>Metrics</h3>
       {loading ? (
         <p>Loading ...</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table radius="none" aria-label="Example static collection table">
+          <TableHeader>
+            <TableColumn>NAME</TableColumn>
+            <TableColumn>DATA TYPE</TableColumn>
+            <TableColumn>STATUS</TableColumn>
+          </TableHeader>
+          <TableBody>
             {data && data.metrics.map(metric => (
-              <tr>
-                <td>{metric.id}</td>
-                <td>{metric.name}</td>
-                <td>{metric.valueType}</td>
-              </tr>
+              <TableRow key={metric.id}>
+                  <TableCell>{metric.name}</TableCell>
+                  <TableCell>{metric.valueType}</TableCell>
+                  <TableCell>
+                    <Button
+                      href={{ pathname: '/dashboard/chart', query: { id: metric.id } }}
+                      as={Link}
+                      variant="solid"
+                    >
+                      Display on chart
+                    </Button>
+                  </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
     </div>
   );
