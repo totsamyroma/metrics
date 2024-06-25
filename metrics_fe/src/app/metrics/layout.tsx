@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Metrics | Dashboard",
-  description: "Metrics dashboard page",
+  title: "Metrics | Metrics List",
+  description: "Metrics list page",
 };
 
 export default function RootLayout({
@@ -11,6 +12,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div id="dashboard-wrapper"> {children} </div>
+    <div id="metrics-wrapper"> {children} </div>
   );
 }

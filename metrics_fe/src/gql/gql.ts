@@ -16,8 +16,8 @@ const documents = {
     "\n  query GetFloatMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on FloatValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n": types.GetFloatMetricValuesDocument,
     "\n  query GetIntegerMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on IntegerValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n": types.GetIntegerMetricValuesDocument,
     "\n  query GetMetricInfo($id: ID!) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricInfoDocument,
-    "\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricsDocument,
-    "\n  query GetUsers {\n    users {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.GetUsersDocument,
+    "\n  query GetMetrics($userId: ID = null){\n    metrics(userId: $userId){\n      user {\n        fullName\n      }\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricsDocument,
+    "\n  query GetUsers {\n    users {\n      id\n      email\n      fullName\n    }\n  }\n": types.GetUsersDocument,
 };
 
 /**
@@ -49,11 +49,11 @@ export function gql(source: "\n  query GetMetricInfo($id: ID!) {\n    metric(id:
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n"): (typeof documents)["\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n"];
+export function gql(source: "\n  query GetMetrics($userId: ID = null){\n    metrics(userId: $userId){\n      user {\n        fullName\n      }\n      id\n      name\n      valueType\n    }\n  }\n"): (typeof documents)["\n  query GetMetrics($userId: ID = null){\n    metrics(userId: $userId){\n      user {\n        fullName\n      }\n      id\n      name\n      valueType\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query GetUsers {\n    users {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n"];
+export function gql(source: "\n  query GetUsers {\n    users {\n      id\n      email\n      fullName\n    }\n  }\n"): (typeof documents)["\n  query GetUsers {\n    users {\n      id\n      email\n      fullName\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

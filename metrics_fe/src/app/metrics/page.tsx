@@ -9,8 +9,11 @@ import { gql } from '../../gql/';
 import Client from '../../gql/client';
 
 const GET_METRICS = gql(/* GraphQL */ `
-  query GetMetrics {
-    metrics {
+  query GetMetrics($userId: ID = null){
+    metrics(userId: $userId){
+      user {
+        fullName
+      }
       id
       name
       valueType
@@ -18,9 +21,9 @@ const GET_METRICS = gql(/* GraphQL */ `
   }
 `);
 
-const DashboardPage = () => {
+const MetricsPage = ({ searchParams }) => {
   // our query's result, data, is typed!
-  const { loading, data } = useQuery(GET_METRICS, { client: Client });
+  const { loading, data } = useQuery(GET_METRICS, { client: Client, variables: { userId: searchParams.user_id }});
 
   return (
     <div>
@@ -28,20 +31,22 @@ const DashboardPage = () => {
       {loading ? (
         <p>Loading ...</p>
       ) : (
-        <Table radius="none" aria-label="Example static collection table">
+        <Table radius="none" aria-label="Metrics list">
           <TableHeader>
-            <TableColumn>NAME</TableColumn>
+            <TableColumn>USER</TableColumn>
+            <TableColumn>METRIC NAME</TableColumn>
             <TableColumn>DATA TYPE</TableColumn>
-            <TableColumn>STATUS</TableColumn>
+            <TableColumn>ACTION</TableColumn>
           </TableHeader>
           <TableBody>
             {data && data.metrics.map(metric => (
               <TableRow key={metric.id}>
+                  <TableCell>{metric.user.fullName}</TableCell>
                   <TableCell>{metric.name}</TableCell>
                   <TableCell>{metric.valueType}</TableCell>
                   <TableCell>
                     <Button
-                      href={{ pathname: '/dashboard/chart', query: { id: metric.id } }}
+                      href={{ pathname: '/metrics/chart', query: { id: metric.id } }}
                       as={Link}
                       variant="solid"
                     >
@@ -57,4 +62,4 @@ const DashboardPage = () => {
   );
 }
 
-export default DashboardPage;
+export default MetricsPage;

@@ -1,5 +1,8 @@
 "use client"
 
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import Link from "next/link";
 import { useQuery } from '@apollo/client';
 import { gql } from '../../gql/';
 import Client from '../../gql/client';
@@ -9,8 +12,7 @@ const GET_USERS = gql(/* GraphQL */ `
     users {
       id
       email
-      firstName
-      lastName
+      fullName
     }
   }
 `);
@@ -25,26 +27,30 @@ const UsersPage = () => {
       {loading ? (
         <p>Loading ...</p>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table radius="none" aria-label="Users list">
+          <TableHeader>
+            <TableColumn>FULL NAME</TableColumn>
+            <TableColumn>EMAIL</TableColumn>
+            <TableColumn>ACTION</TableColumn>
+          </TableHeader>
+          <TableBody>
             {data && data.users.map(user => (
-              <tr>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
-              </tr>
+              <TableRow key={user.id}>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    <Button
+                      href={{ pathname: '/metrics', query: { user_id: user.id } }}
+                      as={Link}
+                      variant="solid"
+                    >
+                      List user metrics
+                    </Button>
+                  </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       )}
     </div>
   );
