@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import "./globals.css";
 
 export default function HomeWrapper({
   children,
@@ -58,7 +57,7 @@ export default function HomeWrapper({
         </Link>
       </div>
 
-      <section>{children}</section>
+      <div id="home-wrapper" className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w lg:text-left">{children}</div>
     </main>
   );
 }

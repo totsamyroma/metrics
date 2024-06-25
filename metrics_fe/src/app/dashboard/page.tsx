@@ -5,12 +5,11 @@ import { gql } from '../../gql/';
 import Client from '../../gql/client';
 
 const GET_METRICS = gql(/* GraphQL */ `
-  query GetUsers {
-    users {
+  query GetMetrics {
+    metrics {
       id
-      email
-      firstName
-      lastName
+      name
+      valueType
     }
   }
 `);
@@ -29,18 +28,16 @@ const DashboardPage = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>Email</th>
-              <th>First Name</th>
-              <th>Last Name</th>
+              <th>Name</th>
+              <th>Type</th>
             </tr>
           </thead>
           <tbody>
-            {data && data.users.map(user => (
+            {data && data.metrics.map(metric => (
               <tr>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
+                <td>{metric.id}</td>
+                <td>{metric.name}</td>
+                <td>{metric.valueType}</td>
               </tr>
             ))}
           </tbody>

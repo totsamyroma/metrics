@@ -13,6 +13,8 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n  query GetMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on FloatValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n": types.GetMetricValuesDocument,
+    "\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricsDocument,
     "\n  query GetUsers {\n    users {\n      id\n      email\n      firstName\n      lastName\n    }\n  }\n": types.GetUsersDocument,
 };
 
@@ -30,6 +32,14 @@ const documents = {
  */
 export function gql(source: string): unknown;
 
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on FloatValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query GetMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on FloatValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n"): (typeof documents)["\n  query GetMetrics {\n    metrics {\n      id\n      name\n      valueType\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

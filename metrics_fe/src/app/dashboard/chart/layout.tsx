@@ -11,6 +11,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div id="dashboard-wrapper"> {children} </div>
+    <div id="chart-wrapper"> {children} </div>
   );
 }

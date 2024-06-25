@@ -6,10 +6,23 @@ module Types
       argument :id, ID, required: true, description: "ID of the object."
     end
 
-    field :users, [Types::UserType], null: false, description: "Fetches a list of users."
+    field :users, [Types::UserType], null: false, resolver: Resolvers::UsersResolver, description: "Fetches a list of users." do
+      argument :with_metrics, Boolean, required: false, description: "Arguement to enable preload of metrics."
+      argument :with_values, Boolean, required: false, description: "Arguement to enable preload of values."
+    end
 
-    def users
-      User.all
+    field :user, Types::UserType, null: true, resolver: Resolvers::UserResolver, description: "Fetches a user." do
+      argument :id, ID, required: true, description: "User's id."
+      argument :with_values, Boolean, required: false, description: "Arguement to enable preload of values."
+    end
+
+    field :metrics, [Types::Metrics::MetricType], null: false, resolver: Resolvers::MetricsResolver, description: "Fetche a list of metrics." do
+      argument :user_id, ID, required: false, description: "Arguement to enable preload of values."
+      argument :with_values, Boolean, required: false, description: "Arguement to enable preload of values."
+    end
+
+    field :metric, Types::Metrics::MetricType, null: true, resolver: Resolvers::MetricResolver, description: "Fetches a metric." do
+      argument :id, ID, required: true, description: "Metric's id."
     end
 
     def node(id:)
