@@ -46,6 +46,13 @@ const UsersPage = () => {
                     >
                       List user metrics
                     </Button>
+                    <Button
+                      href={{ pathname: '/metrics/create', query: { user_id: user.id } }}
+                      as={Link}
+                      variant="solid"
+                    >
+                      Add new metric
+                    </Button>
                   </TableCell>
               </TableRow>
             ))}

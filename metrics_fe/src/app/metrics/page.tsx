@@ -52,6 +52,13 @@ const MetricsPage = ({ searchParams }) => {
                     >
                       Display on chart
                     </Button>
+                    <Button
+                      href={{ pathname: '/metrics/entries/create', query: { metric_id: metric.id, value_type: metric.valueType } }}
+                      as={Link}
+                      variant="solid"
+                    >
+                      Add Entry
+                    </Button>
                   </TableCell>
               </TableRow>
             ))}

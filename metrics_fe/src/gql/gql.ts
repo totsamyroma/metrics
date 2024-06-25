@@ -16,6 +16,9 @@ const documents = {
     "\n  query GetFloatMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on FloatValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n": types.GetFloatMetricValuesDocument,
     "\n  query GetIntegerMetricValues($id: ID!, $after: String, $batchSize: Int) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n      values(first: $batchSize, after: $after) {\n        edges {\n          node {\n            ... on IntegerValue {\n              value\n              timestamp\n            }\n          }\n        }\n        pageInfo {\n          endCursor\n          hasNextPage\n        }\n      }\n    }\n  }\n": types.GetIntegerMetricValuesDocument,
     "\n  query GetMetricInfo($id: ID!) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricInfoDocument,
+    "\n  mutation CreateMetric($userId: ID!, $name: String!, $valueType: String!) {\n    createMetric(input: { userId: $userId, name: $name, valueType: $valueType }) {\n      metric {\n        id\n        name\n        valueType\n      }\n    }\n  }\n": types.CreateMetricDocument,
+    "\n  mutation CreateIntegerMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on IntegerValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n": types.CreateIntegerMetricEntryDocument,
+    "\n  mutation CreateFloatMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on FloatValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n": types.CreateFloatMetricEntryDocument,
     "\n  query GetMetrics($userId: ID = null){\n    metrics(userId: $userId){\n      user {\n        fullName\n      }\n      id\n      name\n      valueType\n    }\n  }\n": types.GetMetricsDocument,
     "\n  query GetUsers {\n    users {\n      id\n      email\n      fullName\n    }\n  }\n": types.GetUsersDocument,
 };
@@ -46,6 +49,18 @@ export function gql(source: "\n  query GetIntegerMetricValues($id: ID!, $after: 
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query GetMetricInfo($id: ID!) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n    }\n  }\n"): (typeof documents)["\n  query GetMetricInfo($id: ID!) {\n    metric(id: $id) {\n      id\n      name\n      valueType\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateMetric($userId: ID!, $name: String!, $valueType: String!) {\n    createMetric(input: { userId: $userId, name: $name, valueType: $valueType }) {\n      metric {\n        id\n        name\n        valueType\n      }\n    }\n  }\n"): (typeof documents)["\n  mutation CreateMetric($userId: ID!, $name: String!, $valueType: String!) {\n    createMetric(input: { userId: $userId, name: $name, valueType: $valueType }) {\n      metric {\n        id\n        name\n        valueType\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateIntegerMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on IntegerValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n"): (typeof documents)["\n  mutation CreateIntegerMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on IntegerValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation CreateFloatMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on FloatValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n"): (typeof documents)["\n  mutation CreateFloatMetricEntry($metricId: ID!, $type: String!, $value: String!, $timestamp: ISO8601DateTime!) {\n    createMetricValue(input: { metricId: $metricId, type: $type, value: $value, timestamp: $timestamp}) {\n      value {\n        ... on FloatValue {\n          value\n          timestamp\n        }\n      }\n      errors\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
