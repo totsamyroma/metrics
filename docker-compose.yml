@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
-      POSTGRES_DB: myapp_development
+      POSTGRES_DB: metrics_development
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
