@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import { useQuery } from '@apollo/client';
-import Client from '../../../../gql/client';
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import Client from "../../../../gql/client";
 
 const MetricValuesFetcher = ({ id, query, batchSize, children }) => {
   const [fetchInProgress, setFetchInProgress] = useState(false);
-  const { loading, data, fetchMore } = useQuery(query, { client: Client, variables: { id, batchSize } });
+  const { loading, data, fetchMore } = useQuery(query, {
+    client: Client,
+    fetchPolicy: "no-cache",
+    variables: { id, batchSize },
+  });
 
   const loadMoreData = () => {
     const endCursor = data?.metric?.values?.pageInfo?.endCursor;
@@ -37,4 +41,3 @@ const MetricValuesFetcher = ({ id, query, batchSize, children }) => {
 };
 
 export default MetricValuesFetcher;
-

@@ -10,7 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div id="chart-wrapper"> {children} </div>
-  );
+  return <div id="chart-wrapper"> {children} </div>;
 }

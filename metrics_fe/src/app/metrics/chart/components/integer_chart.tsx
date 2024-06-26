@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import { gql } from '@apollo/client';
-import MetricValuesFetcher from './metric_values_fetcher';
-import Chart from './chart';
-import Controls from './controls';
+import { useState } from "react";
+import { gql } from "@apollo/client";
+import MetricValuesFetcher from "./metric_values_fetcher";
+import Chart from "./chart";
+import Controls from "./controls";
 
 const GET_INTEGER_METRIC_VALUES = gql(/* GraphQL */ `
   query GetIntegerMetricValues($id: ID!, $after: String, $batchSize: Int) {
@@ -35,7 +35,11 @@ const FetchIntData = ({ id, metricName }) => {
   const [batchSize, setBatchSize] = useState(1000);
 
   return (
-    <MetricValuesFetcher id={id} query={GET_INTEGER_METRIC_VALUES} batchSize={batchSize}>
+    <MetricValuesFetcher
+      id={id}
+      query={GET_INTEGER_METRIC_VALUES}
+      batchSize={batchSize}
+    >
       {({ loading, data, loadMoreData, fetchInProgress }) => (
         <div className="w-full flex flex-col gap-4">
           <h3>Chart</h3>
@@ -48,7 +52,12 @@ const FetchIntData = ({ id, metricName }) => {
             loading={loading || fetchInProgress}
             hasNextPage={data?.metric?.values?.pageInfo?.hasNextPage}
           />
-          <Chart data={data?.metric?.values?.edges || []} metricName={metricName} interval={interval} chartOptions={{ step: true }} />
+          <Chart
+            data={data?.metric?.values?.edges || []}
+            metricName={metricName}
+            interval={interval}
+            chartOptions={{ step: true }}
+          />
         </div>
       )}
     </MetricValuesFetcher>
@@ -56,4 +65,3 @@ const FetchIntData = ({ id, metricName }) => {
 };
 
 export default FetchIntData;
-

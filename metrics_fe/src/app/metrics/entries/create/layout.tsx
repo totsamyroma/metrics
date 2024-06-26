@@ -10,9 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div id="metric-entry-create-form"> {children} </div>
-  );
+  return <div id="metric-entry-create-form"> {children} </div>;
 }
-
-

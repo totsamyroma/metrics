@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "compile": "graphql-codegen",
-    "watch": "graphql-codegen -w"
+    "watch": "graphql-codegen -w",
+    "prettier-check": "prettier --check",
+    "prettier-write": "prettier --write"
   },
   "dependencies": {
     "@apollo/client": "^3.10.5",
@@ -25,6 +27,7 @@
     "highcharts-react-official": "^3.2.1",
     "moment": "^2.30.1",
     "next": "14.2.4",
+    "prettier": "^3.3.2",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18"

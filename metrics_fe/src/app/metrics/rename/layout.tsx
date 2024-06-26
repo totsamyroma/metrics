@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "Metrics | Metrics List",
-  description: "Metrics list page",
+  title: "Metrics | Rename",
+  description: "Rename metric page",
 };
 
 export default function RootLayout({
@@ -11,5 +10,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div id="metrics-wrapper"> {children} </div>;
+  return <div id="metric-create-form"> {children} </div>;
 }

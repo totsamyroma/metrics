@@ -6,7 +6,7 @@ class Resolvers::MetricResolver < Resolvers::BaseResolver
   def resolve(id:)
     # TODO: implement authorization
 
-    Metric.joins(:values).find_by(id:).tap do |metric|
+    Metric.find_by(id:).tap do |metric|
       context[:type] = metric.value_type
     end
   end

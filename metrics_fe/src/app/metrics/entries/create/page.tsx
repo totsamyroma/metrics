@@ -1,18 +1,17 @@
 "use client";
 
-import CreateMetricEntryComponent from './components/create_metric_entry';
+import CreateMetricEntryComponent from "./components/create_metric_entry";
 
 const CreateMetricEntryPage = ({ searchParams }) => {
   const metricId = searchParams.metric_id; // Assuming userId is passed as a search param
   const valueType = searchParams.value_type;
 
   return (
-    <div>
+    <div className="w-full flex flex-col gap-4">
       <h1>Create Metric Entry</h1>
-      <CreateMetricEntryComponent metricId={metricId} valueType={valueType}/>
+      <CreateMetricEntryComponent metricId={metricId} valueType={valueType} />
     </div>
   );
 };
 
 export default CreateMetricEntryPage;
-

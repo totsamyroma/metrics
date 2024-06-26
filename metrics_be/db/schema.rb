@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_234523) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_235156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_234523) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "timestamp", precision: nil
+    t.datetime "deleted_at", precision: nil
     t.index ["metric_id"], name: "index_metric_values_on_metric_id"
   end
 
@@ -29,6 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_234523) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "value_type", default: 0
+    t.datetime "deleted_at", precision: nil
     t.index ["user_id"], name: "index_metrics_on_user_id"
   end
 
@@ -38,6 +40,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_234523) do
     t.string "last_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at", precision: nil
   end
 
   add_foreign_key "metric_values", "metrics"

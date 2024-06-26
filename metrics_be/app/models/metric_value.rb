@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class MetricValue < ApplicationRecord
+  acts_as_paranoid
+
   belongs_to :metric
 
   validate :validate_metric_value_content
@@ -20,5 +22,6 @@ class MetricValue < ApplicationRecord
     errors.add(:content, "metric type missmatch") if type != metric.value_type
     errors.add(:content, "missing value") if value.nil?
     # TODO: check value and type match
+    # errors.add(:content, "value type missmatch") if value.class != type
   end
 end

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from 'react';
-import { gql } from '@apollo/client';
-import MetricValuesFetcher from './metric_values_fetcher';
-import Chart from './chart';
-import Controls from './controls';
+import { useState } from "react";
+import { gql } from "@apollo/client";
+import MetricValuesFetcher from "./metric_values_fetcher";
+import Chart from "./chart";
+import Controls from "./controls";
 
 const GET_FLOAT_METRIC_VALUES = gql(/* GraphQL */ `
   query GetFloatMetricValues($id: ID!, $after: String, $batchSize: Int) {
@@ -35,7 +35,11 @@ const FetchFloatData = ({ id, metricName }) => {
   const [batchSize, setBatchSize] = useState(1000);
 
   return (
-    <MetricValuesFetcher id={id} query={GET_FLOAT_METRIC_VALUES} batchSize={batchSize}>
+    <MetricValuesFetcher
+      id={id}
+      query={GET_FLOAT_METRIC_VALUES}
+      batchSize={batchSize}
+    >
       {({ loading, data, loadMoreData, fetchInProgress }) => (
         <div className="w-full flex flex-col gap-4">
           <h3>Chart</h3>
@@ -48,7 +52,12 @@ const FetchFloatData = ({ id, metricName }) => {
             loading={loading || fetchInProgress}
             hasNextPage={data?.metric?.values?.pageInfo?.hasNextPage}
           />
-          <Chart data={data?.metric?.values?.edges || []} metricName={metricName} interval={interval} chartOptions={{ type: "spline" }} />
+          <Chart
+            data={data?.metric?.values?.edges || []}
+            metricName={metricName}
+            interval={interval}
+            chartOptions={{ type: "spline" }}
+          />
         </div>
       )}
     </MetricValuesFetcher>
@@ -56,4 +65,3 @@ const FetchFloatData = ({ id, metricName }) => {
 };
 
 export default FetchFloatData;
-
