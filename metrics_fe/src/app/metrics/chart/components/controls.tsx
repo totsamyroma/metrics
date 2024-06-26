@@ -30,7 +30,7 @@ const Controls = ({
           defaultSelectedKeys={[interval]}
           onChange={handleIntervalChange}
         >
-          <SelectItem key="raw">Raw data (seconds)</SelectItem>
+          <SelectItem key="raw">Raw data</SelectItem>
           <SelectItem key="minute">Average (minute)</SelectItem>
           <SelectItem key="hour">Average (hour)</SelectItem>
           <SelectItem key="day">Average (day)</SelectItem>

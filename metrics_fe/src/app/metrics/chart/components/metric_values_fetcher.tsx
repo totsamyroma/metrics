@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useQuery } from "@apollo/client";
 import Client from "../../../../gql/client";
+import { debug } from "console";
 
 const MetricValuesFetcher = ({ id, query, batchSize, children }) => {
   const [fetchInProgress, setFetchInProgress] = useState(false);
   const { loading, data, fetchMore } = useQuery(query, {
     client: Client,
-    fetchPolicy: "no-cache",
+    fetchPolicy: "cache-and-network",
     variables: { id, batchSize },
   });
 
@@ -19,6 +20,7 @@ const MetricValuesFetcher = ({ id, query, batchSize, children }) => {
       variables: { id, after: endCursor, batchSize },
       updateQuery: (prevResult, { fetchMoreResult }) => {
         setFetchInProgress(false);
+        debugger
         if (!fetchMoreResult) return prevResult;
         return {
           ...prevResult,
